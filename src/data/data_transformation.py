@@ -9,7 +9,7 @@ import sys
 from src.utils.logger import logging
 import pandas as pd
 import numpy as np
-from src.utils.utils import save_object
+from src.utils.io import save_object
 
 
 @dataclass
@@ -45,7 +45,7 @@ class DataTransformation:
             cat_pipeline = Pipeline(
                 steps=[
                     ("imputer", SimpleImputer(strategy="most_frequent")),
-                    ("one_hot_encoder", OneHotEncoder()),
+                    ("one_hot_encoder", OneHotEncoder(handle_unknown="ignore")),
                     ("scaler", StandardScaler(with_mean=False)),
                 ]
             )

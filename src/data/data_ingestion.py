@@ -6,6 +6,7 @@ from src.utils.logger import logging
 import sys
 from sklearn.model_selection import train_test_split
 from src.data.data_transformation import DataTransformation
+from src.models.train import ModelTrainer
 
 
 @dataclass
@@ -52,6 +53,9 @@ if __name__ == "__main__":
     train_path, test_path = obj.initiate_data_ingestion()
 
     data_transformation = DataTransformation()
-    data_transformation.initiate_data_transformation(
+    train_array, test_array,_ = data_transformation.initiate_data_transformation(
         train_path=train_path, test_path=test_path
     )
+    model_score = ModelTrainer()
+    print(model_score.initiate_model_trainer(train_array=train_array, test_array=test_array))
+    
